@@ -20,5 +20,10 @@ Run script in git repository. As result local git config will be updated with ma
 Note that repository specific config sections has higher priority.
 
 
+## Git hook
+You can setup local or global git hook for automatic run
+See [git docs](https://git-scm.com/docs/githooks)
+
+
 ## Licence
 [MIT](LICENCE.txt)
