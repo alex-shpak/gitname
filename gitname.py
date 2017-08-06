@@ -6,8 +6,11 @@ import os
 from urlparse import urlparse
 from os.path import expanduser
 
+def color(text, color='\033[0;32m'):
+    return '%s%s\033[0m' % (color, text)
 
 status, remote = commands.getstatusoutput('git remote get-url origin')
+
 if status is not 0:
     print 'No remote found in'
     os.system('git config --list')
@@ -18,18 +21,17 @@ if '://' not in remote:
 
 hostname = urlparse(remote).hostname
 
-config_defaults = { 'name': None, 'email': None }
-config = ConfigParser.SafeConfigParser(defaults = config_defaults)
+config = ConfigParser.SafeConfigParser()
 config.read('%s/.gitname' % expanduser('~'))
 
 if not config.has_section(hostname):
-    print 'No section "%s" found in ~/.gitname' % hostname
+    print 'No section %s found in ~/.gitname' % color(hostname)
     quit()
 
-git_name = config.get(hostname, 'name')
-git_email = config.get(hostname, 'email')
+host_items = config.items(hostname)
+if not host_items:
+    print 'No properties found for %s' % color(hostname)
 
-if git_name is not None:
-    print '-- %s<%s>' % (git_name, git_email)
-    os.system('git config user.name "%s"' % git_name)
-    os.system('git config user.email "%s"' % git_email)
+for key, value in host_items:
+    print 'Set %s "%s"' % (color(key), value)
+    os.system('git config %s "%s"' % (key, value))

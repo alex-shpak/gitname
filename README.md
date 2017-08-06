@@ -1,6 +1,6 @@
 ## Gitname
 
-Simple script to set `user.name` and `user.email` into git repository based on remote hostname.
+Simple script to set `user.name` and `user.email` or other properties into git repository based on remote hostname.
 
 
 ## Setup
@@ -9,8 +9,8 @@ Put `gitname.py` into your path
 Put file `.gitname` into your home directory with content
 ```ini
 [github.com]
-name: User Name
-email: username@users.noreply.github.com
+user.name: User Name
+user.email: username@users.noreply.github.com
 ```
 
 Run script in git repository.
