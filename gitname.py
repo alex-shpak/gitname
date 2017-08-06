@@ -27,13 +27,13 @@ def merge_sections(config, *sections):
     return items
 
 
-def getname():
+def gitname(args):
     status, remote = commands.getstatusoutput('git remote get-url origin')
 
     if status is not 0:
-        logger.info('No remote found in')
+        logger.warning('No remote found in')
         os.system('git config --list')
-        quit()
+        return
 
     if '://' not in remote:
         remote = 'scheme://%s' % remote
@@ -52,25 +52,43 @@ def getname():
     )
     
     if not items:
-        logger.info('No properties found for %s' % color(remote_host))
+        logger.warning('No properties found for %s' % color(remote_host))
+        return
 
     for key, value in items.iteritems():
+        status, current = commands.getstatusoutput('git config %s' % key)
+        if current == value:
+            continue
+
         logger.info('Set %s "%s"' % (color(key), value))
         os.system('git config %s "%s"' % (key, value))
 
+def reminder():
+    status, name = commands.getstatusoutput('git config user.name')
+    status, email = commands.getstatusoutput('git config user.email')
+
+    author = color('%s <%s>' % (name, email))
+    logger.warning('Commiting as %s' % author)
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Updates git config based on ~/.gitname.')
     parser.add_argument(
-        '--quiet',
-        action="store_true",
+        '--verbose',
+        action='store_true',
         help='Run without output'
     )
-
+    parser.add_argument(
+        '--no-reminder',
+        action='store_true',
+        help='Run without output'
+    )
     args = parser.parse_args()
+
     logging.basicConfig(
-        level=logging.WARNING if args.quiet else logging.INFO,
-        format="%(message)s"  # hide level
+        level=logging.INFO if args.verbose else logging.WARNING,
+        format='%(message)s'  # hide level
     )
 
-    getname()
+    gitname(args)
+    if not args.no_reminder:
+        reminder()
