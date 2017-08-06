@@ -2,10 +2,14 @@
 
 import commands
 import ConfigParser
+import logging
 import os
 import re
+import argparse
 from urlparse import urlparse
-from os.path import expanduser
+
+
+logger = logging.getLogger('gitname')
 
 
 def color(text, color='\033[0;32m'):
@@ -27,7 +31,7 @@ def getname():
     status, remote = commands.getstatusoutput('git remote get-url origin')
 
     if status is not 0:
-        print 'No remote found in'
+        logger.info('No remote found in')
         os.system('git config --list')
         quit()
 
@@ -39,7 +43,7 @@ def getname():
     remote_repository = '/'.join(remote_items)
 
     config = ConfigParser.SafeConfigParser()
-    config.read('%s/.gitname' % expanduser('~'))
+    config.read('%s/.gitname' % os.path.expanduser('~'))
 
     items = merge_sections(
         config,
@@ -48,12 +52,25 @@ def getname():
     )
     
     if not items:
-        print 'No properties found for %s' % color(remote_host)
+        logger.info('No properties found for %s' % color(remote_host))
 
     for key, value in items.iteritems():
-        print 'Set %s "%s"' % (color(key), value)
+        logger.info('Set %s "%s"' % (color(key), value))
         os.system('git config %s "%s"' % (key, value))
 
 
 if __name__ == '__main__':
+    parser = argparse.ArgumentParser(description='Updates git config based on ~/.gitname.')
+    parser.add_argument(
+        '--quiet',
+        action="store_true",
+        help='Run without output'
+    )
+
+    args = parser.parse_args()
+    logging.basicConfig(
+        level=logging.WARNING if args.quiet else logging.INFO,
+        format="%(message)s"  # hide level
+    )
+
     getname()
