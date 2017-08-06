@@ -5,7 +5,7 @@ Simple script to set `user.name` and `user.email` or other properties into git r
 
 ## Setup
 Put `gitname.py` into your path, for example as `~/.local/bin/gitname`  
-Run `chmod +x gitname.py` optioanlly if needed
+Run `chmod +x gitname.py` if needed
 Put file `.gitname` into your home directory with content
 ```ini
 [github.com]
@@ -21,8 +21,7 @@ Note that repository specific config sections has higher priority.
 
 
 ## Git hook
-You can setup local or global git hook for automatic run
-See [git docs](https://git-scm.com/docs/githooks)
+You can setup local or global git hook for automatic run. See [git docs](https://git-scm.com/docs/githooks)
 
 
 ## Licence
