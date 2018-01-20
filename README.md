@@ -34,6 +34,20 @@ Set user.email "alex-shpak@users.noreply.github.com"
 user@host:~/Projects/gitrepo$ 
 ```
 
+## Flags
+```
+$ python gitname.py -h
+usage: gitname.py [-h] [-v] [-q] [-r REMOTE]
+
+Updates git config based on ~/.gitname.
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -v, --verbose         print debugging output
+  -q, --quiet           run without output
+  -r REMOTE, --remote REMOTE
+                        sets remote for lookup
+```
 
 ## Git hook
 You can setup local or global git hook for automatic run. See [git docs](https://git-scm.com/docs/githooks)
