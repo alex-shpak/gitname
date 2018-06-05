@@ -34,6 +34,13 @@ Set user.email "alex-shpak@users.noreply.github.com"
 user@host:~/Projects/gitrepo$ 
 ```
 
+Optionally run below commands to unset globally configured name and email and [prevent Git](https://git-scm.com/docs/git-config#git-config-useruseConfigOnly) from guessing them in newly clonned repositories:
+```sh
+user@host:~$ git config --global user.name ""
+user@host:~$ git config --global user.email ""
+user@host:~$ git config --global user.useConfigOnly true
+```
+
 ## Flags
 ```
 $ python gitname.py -h
