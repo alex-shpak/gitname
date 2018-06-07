@@ -1,19 +1,17 @@
 ## Gitname
-
 Simple script to set `user.name` and `user.email` or other properties into git repository based on remote hostname or repository.
 
 
 ## Setup
-Put `gitname.py` into your path, for example as `/usr/local/bin/gitname` or `~/.local/bin/gitname`:
-```bash
+### Install
+Put `gitname.py` into your path, for example as `/usr/local/bin/gitname` or `~/.local/bin/gitname` and set executable permissions
+```sh
 curl -L https://raw.githubusercontent.com/alex-shpak/gitname/master/gitname.py > /usr/local/bin/gitname
+sudo chmod +x /usr/local/bin/gitname
 ``` 
 
-Set executable permissions to the script:
-```bash
-sudo chmod +x /usr/local/bin/gitname
-```
 
+### Configure
 Put file `.gitname` into your home directory with content
 ```ini
 [github.com]
@@ -34,11 +32,12 @@ Set user.email "alex-shpak@users.noreply.github.com"
 user@host:~/Projects/gitrepo$ 
 ```
 
-Optionally run below commands to unset globally configured name and email and [prevent Git](https://git-scm.com/docs/git-config#git-config-useruseConfigOnly) from guessing them in newly clonned repositories:
+### Unset globally configured name
+Optionally run below commands to unset globally configured name and email and [prevent Git](https://git-scm.com/docs/git-config#git-config-useruseConfigOnly) from guessing them in newly clonned repositories
 ```sh
-user@host:~$ git config --global user.name ""
-user@host:~$ git config --global user.email ""
-user@host:~$ git config --global user.useConfigOnly true
+git config --global user.name ""
+git config --global user.email ""
+git config --global user.useConfigOnly true
 ```
 
 ## Flags
@@ -60,5 +59,5 @@ optional arguments:
 You can setup local or global git hook for automatic run. See [git docs](https://git-scm.com/docs/githooks)
 
 
-## Licence
-[MIT](LICENCE.txt)
+## License
+[MIT](LICENSE.txt)
