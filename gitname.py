@@ -42,7 +42,8 @@ def gitname(args):
     if '://' not in remote:
         remote = 'scheme://%s' % remote
 
-    remote_items = re.split('://|@|:|/', remote)[2:]
+    drop_items = 1 if remote.startswith('https') else 2
+    remote_items = re.split('://|@|:|/', remote)[drop_items:]
     remote_host = remote_items[0]
 
     config = ConfigParser.SafeConfigParser()
