@@ -75,6 +75,22 @@ def reminder():
     logger.info('Committing as %s' % author)
 
 
+def validate():
+    status, message = commands.getstatusoutput('git status')
+    status = os.WEXITSTATUS(status)
+
+    if status is 0:
+        return
+
+    if status is 127:
+        logger.warning('Git binary not found')
+        quit(status)
+
+    if status is 128:
+        logger.error('Not a git repository')
+        quit(status)
+
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Updates git config based on ~/.gitname.')
     parser.add_argument(
@@ -107,5 +123,6 @@ if __name__ == '__main__':
         format='%(message)s'  # hide logging level
     )
 
+    validate()
     gitname(args)
     reminder()
