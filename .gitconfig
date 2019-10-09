@@ -1,0 +1,17 @@
+# This is an example of git config file
+[user]
+	name = 
+	email = 
+	useConfigOnly = true
+
+[user "github.com"]
+	name = Alex Shpak
+	email = alex-shpak@users.noreply.github.com
+
+[user "github.com/private-org"]
+	name = Alexander Shpak
+	email = organization-email@example.com
+
+[user "gitlab.com"]
+	name = Alex Shpak
+	email = gitlab.email@example.com

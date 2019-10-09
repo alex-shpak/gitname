@@ -1,6 +1,0 @@
-[github.com]
-user.name: User Name
-user.email: username@users.noreply.github.com
-
-[github.com/username/repo.git]
-user.name: User

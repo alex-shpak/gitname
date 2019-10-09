@@ -1,8 +1,10 @@
 ## Gitname
-Simple script to set `user.name` and `user.email` or other properties into git repository based on remote hostname or repository.
+Simple script to set `user.name` and `user.email` or other properties into git repository based on git remote url.
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![Go Report Card](https://goreportcard.com/badge/github.com/alex-shpak/gitname)](https://goreportcard.com/report/github.com/alex-shpak/gitname)
 
-## Setup
+## Setup (Outdated)
 ### Install
 Put `gitname.py` into your path, for example as `/usr/local/bin/gitname` or `~/.local/bin/gitname` and set executable permissions
 ```sh
@@ -60,4 +62,4 @@ You can setup local or global git hook for automatic run. See [git docs](https:/
 
 
 ## License
-[MIT](LICENSE.txt)
+[MIT](LICENSE)
