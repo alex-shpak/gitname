@@ -19,6 +19,12 @@ $ brew install gitname
 ### Pre-compiled Binaries
 You can download binary for your platform directly from [releases](https://github.com/alex-shpak/gitname/releases) page.
 
+### Install from sources
+```
+$ go get -u github.com/alex-shpak/gitname
+$ go install github.com/alex-shpak/gitname
+```
+
 ## Configure
 Add these lines to `.gitconfig` file into your home directory, modify where needed. You can use other global [git config files](https://git-scm.com/docs/git-config#FILES) as well.
 
