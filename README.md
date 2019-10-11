@@ -20,7 +20,7 @@ $ brew install gitname
 You can download binary for your platform directly from [releases](https://github.com/alex-shpak/gitname/releases) page.
 
 ## Configure
-Add these lines to `.gitconfig` file into your home directory, modify where needed. You can use other global [git config giles](https://git-scm.com/docs/git-config#FILES) as well.
+Add these lines to `.gitconfig` file into your home directory, modify where needed. You can use other global [git config files](https://git-scm.com/docs/git-config#FILES) as well.
 
 ```ini
 [user "github.com"]
