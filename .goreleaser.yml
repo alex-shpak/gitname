@@ -18,22 +18,12 @@ archives:
 checksum:
   name_template: "checksums.txt"
 
-snapshot:
-  name_template: "{{ .Tag }}-next"
-
 brews:
   - name: gitname
     homepage: "https://github.com/alex-shpak/gitname"
     description: "Simple script to set git config properties in git repository based on remote url."
-    github:
-      owner: alex-shpak
-      name: gitname
-    commit_author:
-      name: Alex Shpak
-      email: alex-shpak@users.noreply.github.com
 
-    folder: Formula
-    url_template: "https://github.com/<repo_owner>/<repo_name>/releases/download/{{ .Tag }}/{{ .ArtifactName }}"
+    url_template: "https://github.com/alex-shpak/gitname/releases/download/{{ .Tag }}/{{ .ArtifactName }}"
     dependencies:
       - git
 
