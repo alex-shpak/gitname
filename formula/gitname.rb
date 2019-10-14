@@ -6,11 +6,11 @@ class Gitname < Formula
     bottle :unneeded
 
     if OS.mac?
-      url "https://github.com/alex-shpak/gitname/releases/download/v2/gitname_3_Darwin_x86_64.tar.gz"
+      url "https://github.com/alex-shpak/gitname/releases/download/v3/gitname_3_Darwin_x86_64.tar.gz"
       sha256 "c00ce998aa8d83e269661818724957393500d7981b6b139f5f121baa03597ee7"
     elsif OS.linux?
       if Hardware::CPU.intel?
-        url "https://github.com/alex-shpak/gitname/releases/download/v2/gitname_3_Linux_x86_64.tar.gz"
+        url "https://github.com/alex-shpak/gitname/releases/download/v3/gitname_3_Linux_x86_64.tar.gz"
         sha256 "6ef614cec45dd1ed4ec9596477a5f4e0afcb3f93b7bcf9b25609c3b5295c6f75"
       end
     end
