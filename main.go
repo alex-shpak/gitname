@@ -66,9 +66,14 @@ func main() {
 
 // urlParts returns essential parts of git remote. Removes schema, auth and splitting into parts.
 func urlParts(url string) []string {
+	substrAfter := func(s string, sub string) string {
+		from := strings.Index(url, sub) + len(sub)
+		return s[from:]
+	}
+
 	url = strings.TrimSpace(url)
-	from := strings.Index(url, "@") + 1
-	url = url[from:] //Remove url part before @ (schema, auth)
+	url = substrAfter(url, "://")
+	url = substrAfter(url, "@")
 
 	return regexp.MustCompile("[:/@]+").Split(url, -1)
 }
