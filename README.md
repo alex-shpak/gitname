@@ -50,6 +50,8 @@ Navigate to target git repository and run `gitname`:
 2019/10/11 21:14:54 Committing as Alex Shpak <alex-shpak@users.noreply.github.com>
 ```
 
+You can set specific section by passing name of section as argument: `gitname github.com`, this comes useful when there is no remote yet.
+
 You can also create handy alias.
 
 ```sh

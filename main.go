@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"log"
+	"os"
 	"os/exec"
 	"regexp"
 	"strings"
@@ -36,17 +37,25 @@ func main() {
 		log.Fatal(string(output))
 	}
 
-	remote, err := exec.Command("git", "remote", "get-url", remoteName).Output()
-	if err != nil {
-		log.Fatalf("Remote '%s' not found", highlight(remoteName))
-	}
+	remote := func() string {
+		if len(os.Args) > 1 {
+			return os.Args[1]
+		}
 
-	urlParts := urlParts(string(remote))
+		remote, err := exec.Command("git", "remote", "get-url", remoteName).Output()
+		if err != nil {
+			log.Fatalf("Remote '%s' not found", highlight(remoteName))
+		}
+
+		return string(remote)
+	}()
+
+	urlParts := urlParts(remote)
 	config := map[string]string{}
 
 	// Merge config values, more deep links have higher force
 	for n := range urlParts {
-		subsection := strings.Join(urlParts[:n], "/")
+		subsection := strings.Join(urlParts[:n+1], "/")
 		values := gitSubsectionConfig(subsection)
 
 		for k, v := range values {
@@ -55,6 +64,10 @@ func main() {
 	}
 
 	// Set resolved config values
+	if len(config) == 0 {
+		log.Printf("No values matched for '%s'", highlight(remote))
+	}
+
 	for name, value := range config {
 		if err := exec.Command("git", "config", name, value).Run(); err != nil {
 			log.Fatalln(err)
@@ -67,8 +80,11 @@ func main() {
 // urlParts returns essential parts of git remote. Removes schema, auth and splitting into parts.
 func urlParts(url string) []string {
 	substrAfter := func(s string, sub string) string {
-		from := strings.Index(url, sub) + len(sub)
-		return s[from:]
+		index := strings.Index(url, sub)
+		if index < 0 {
+			return s
+		}
+		return s[index+len(sub):]
 	}
 
 	url = strings.TrimSpace(url)
