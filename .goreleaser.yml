@@ -24,7 +24,7 @@ brews:
     description: "Simple script to set git config properties in git repository based on remote url."
 
     folder: formula
-    github:
+    tap:
       owner: alex-shpak
       name: gitname
     commit_author:
