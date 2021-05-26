@@ -47,7 +47,7 @@ func main() {
 			log.Fatalf("Remote '%s' not found", highlight(remoteName))
 		}
 
-		return string(remote)
+		return strings.TrimSpace(string(remote))
 	}()
 
 	urlParts := urlParts(remote)
