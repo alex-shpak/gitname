@@ -6,7 +6,6 @@ class Gitname < Formula
   desc "Simple script to set git config properties in git repository based on remote url."
   homepage "https://github.com/alex-shpak/gitname"
   version "5"
-  bottle :unneeded
 
   if OS.mac? && Hardware::CPU.intel?
     url "https://github.com/alex-shpak/gitname/releases/download/v5/gitname_5_Darwin_x86_64.tar.gz"
