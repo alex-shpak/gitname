@@ -52,7 +52,7 @@ homebrew_casks:
     homepage: "https://github.com/alex-shpak/gitname"
     description: "Simple script to set git config properties in git repository based on remote url."
 
-    directory: formula
+    directory: Casks
     repository:
       owner: alex-shpak
       name: gitname
