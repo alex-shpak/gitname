@@ -4,21 +4,21 @@ cask "gitname" do
 
   on_macos do
     on_arm do
-      sha256 "0f8d6c024793d0f4774deafd4fc8e170bba2946a775360682aa3b49d6a8e9e0a"
+      sha256 "d6214d1a2de2428adfad31705ae6407680e7151ee01c8b75d529c7637e8789dc"
       url "https://github.com/alex-shpak/gitname/releases/download/v#{version}/gitname_Darwin_arm#{version}4.tar.gz"
     end
     on_intel do
-      sha256 "39cec50e8a20ee51136d2f511b064abb21f412b9c08f5683dc9f4c51c7bf8f6e"
+      sha256 "6e330e026d4a3aff47c24cbe9c21bdc493379c6bceed032460a53702fed233f5"
       url "https://github.com/alex-shpak/gitname/releases/download/v#{version}/gitname_Darwin_x8#{version}_#{version}4.tar.gz"
     end
   end
   on_linux do
     on_arm do
-      sha256 "f68264545a52bebeb14f3c7df90f6fc9fd19573e70053b94ad3a9c0a3895f24f"
+      sha256 "e644a7542c1034cf142189d8845775bcdd9c3f0467fca3eb13786bbbe6a28133"
       url "https://github.com/alex-shpak/gitname/releases/download/v#{version}/gitname_Linux_arm#{version}4.tar.gz"
     end
     on_intel do
-      sha256 "70778dba7bc423de003ed0c40bd70cdac7fc1469d8de6d9e216230db141d67a2"
+      sha256 "269b3e195af580ccbbada9af932e45e21392384761fcb7e1a21950c73c4e4d57"
       url "https://github.com/alex-shpak/gitname/releases/download/v#{version}/gitname_Linux_x8#{version}_#{version}4.tar.gz"
     end
   end
@@ -35,6 +35,12 @@ cask "gitname" do
     ]
 
   binary "gitname"
+
+  postflight do
+    if OS.mac?
+      system_command "/usr/bin/xattr", args: ["-dr", "com.apple.quarantine", "#{staged_path}/gitname"]
+    end
+  end
 
   # No zap stanza required
 end
