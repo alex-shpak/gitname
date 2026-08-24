@@ -1,0 +1,67 @@
+version: 2
+
+before:
+  hooks:
+    - go mod tidy
+    - go generate ./...
+
+builds:
+  - main: ./...
+    env:
+      - CGO_ENABLED=0
+    goos:
+      - linux
+      - windows
+      - darwin
+    goarch:
+      - arm64
+      - amd64
+      - "386"
+
+archives:
+  - formats: [tar.gz]
+    # this name template makes the OS and Arch compatible with the results of `uname`.
+    name_template: >-
+      {{ .ProjectName }}_
+      {{- title .Os }}_
+      {{- if eq .Arch "amd64" }}x86_64
+      {{- else if eq .Arch "386" }}i386
+      {{- else }}{{ .Arch }}{{ end }}
+      {{- if .Arm }}v{{ .Arm }}{{ end }}
+    # use zip for windows archives
+    format_overrides:
+      - goos: windows
+        formats: [zip]
+
+changelog:
+  sort: asc
+  filters:
+    exclude:
+      - "^docs:"
+      - "^test:"
+
+release:
+  footer: >-
+
+    ---
+
+    Released by [GoReleaser](https://github.com/goreleaser/goreleaser).
+
+homebrew_casks:
+  - name: gitname
+    homepage: "https://github.com/alex-shpak/gitname"
+    description: "Simple script to set git config properties in git repository based on remote url."
+
+    directory: formula
+    repository:
+      owner: alex-shpak
+      name: gitname
+    commit_author:
+      name: Alex Shpak
+      email: alex-shpak@users.noreply.github.com
+
+    url:
+      template: "https://github.com/alex-shpak/gitname/releases/download/{{ .Tag }}/{{ .ArtifactName }}"
+      
+    dependencies:
+      - formula: git

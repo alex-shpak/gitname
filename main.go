@@ -4,8 +4,9 @@ import (
 	"bufio"
 	"flag"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"log"
+	"maps"
 	"os"
 	"os/exec"
 	"regexp"
@@ -23,7 +24,7 @@ func init() {
 	flag.Parse()
 
 	if quiet { // Mute logging
-		log.SetOutput(ioutil.Discard)
+		log.SetOutput(io.Discard)
 	}
 }
 
@@ -58,9 +59,7 @@ func main() {
 		subsection := strings.Join(urlParts[:n+1], "/")
 		values := gitSubsectionConfig(subsection)
 
-		for k, v := range values {
-			config[k] = v
-		}
+		maps.Copy(config, values)
 	}
 
 	// Set resolved config values
